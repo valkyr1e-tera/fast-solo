@@ -1,0 +1,11 @@
+{
+	"files": {
+		"index.js": "d45298c96dd4239475ebdbd2952d3489512dfd04349e64cff85bf205bd43058a",
+		"module.json": "adb7101b1488edb8fb024133b77287f9cb70953fe421f407d243ed0ee12ce823"
+	},
+	"defs": {
+		"C_RESET_ALL_DUNGEON": 1,
+		"S_SPAWN_ME": 3,
+		"S_SPAWN_NPC": 9
+	}
+}

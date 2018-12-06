@@ -1,0 +1,6 @@
+{
+	"disableAutoUpdate": false,
+	"options": { "niceName": "fast-solo" },
+    "servers": ["https://raw.githubusercontent.com/mornsta/fast-solo/master/"],
+    "supportUrl": "https://github.com/mornsta/fast-solo/issues"
+}
