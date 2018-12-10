@@ -1,6 +1,11 @@
 {
 	"disableAutoUpdate": false,
-	"options": { "niceName": "fast-solo" },
-    "servers": ["https://raw.githubusercontent.com/mornsta/fast-solo/master/"],
-    "supportUrl": "https://github.com/mornsta/fast-solo/issues"
+	"name": "fast-solo",
+	"author": "chi",
+	"description": "Speeds up solo dungeon farming",
+	"options": {
+		"niceName": "FastSolo"
+	},
+	"servers": ["https://raw.githubusercontent.com/mornsta/fast-solo/master/"],
+	"supportUrl": "https://github.com/mornsta/fast-solo/issues"
 }
