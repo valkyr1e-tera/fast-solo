@@ -1,12 +1,12 @@
 {
 	"files": {
-		"index.js": "f59532bf9c0cdfb1cc2c9bee6bc57cf7623bd64be3e44553d887818e66eb4630",
+		"index.js": "ccbf1640d0628fdf3e1a8abf32cb5f4d025d175bfa31723efb1ab68de34cb40c",
 		"module.json": "e28a3aa8da5750a88fc8c81f86d7196cc9e5ad4560f3e601a83d391cd612b836",
 		"readme.md": "0b40d42562256ae5d793e848d50ef0297922ef72d47cd04bfda2d148c7abbfe5"
 	},
 	"defs": {
 		"C_RESET_ALL_DUNGEON": 1,
 		"S_SPAWN_ME": 3,
-		"S_SPAWN_NPC": 9
+		"S_SPAWN_NPC": 10
 	}
 }
