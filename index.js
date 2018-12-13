@@ -2,6 +2,7 @@ const Vec3 = require('tera-vec3');
 
 module.exports = function FastSolo(mod) {
 	const chestIds = [81341, 81342],
+	chestLoc = new Vec3(52562, 117921, 4431),
 	data = {
 		7005: { // Velika
 			spawn: new Vec3(-481, 6301, 1956),
@@ -70,15 +71,33 @@ module.exports = function FastSolo(mod) {
 		}
 	})
 
-	mod.command.add('solo', {
-		$default() {
+	mod.command.add('solo', (arg) => {
+		if (arg && arg.length > 0)
+			arg = arg.toLowerCase();
+		switch (arg) {
+		case 'help':
 			mod.command.message('Usage: /8 solo - Turn module on/off.');
-		},
-		$none() {
+			break;
+		case 'box':
+			if (zone == 9713)
+				teleport();
+			mod.command.message('Attempted to teleport to ghillie chest.');
+			break;
+		default:
 			enabled = !enabled;
 			mod.command.message('Module ' + (enabled ? '<font color="#56B4E9">enabled</font>' : '<font color="#E69F00">disabled</font>'));
-		},
+			break;
+		}
 	})
+	
+	function teleport() {
+		mod.toClient('S_INSTANT_MOVE', 3, {
+				gameId: mod.game.me.gameId,
+				loc: chestLoc,
+				w: 0.18
+			});
+		return false;
+	}
 	
 	function gibMeDragon() {
         mod.toClient('S_CHAT', 2, {    

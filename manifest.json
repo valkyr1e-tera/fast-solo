@@ -1,6 +1,6 @@
 {
 	"files": {
-		"index.js": "a55c795f84a46200e7e7948d88467e4f4882dbc3aeecef03fe57cf3d0f06f593",
+		"index.js": "a1c777166ab6a340c0850abe4825790d9f96b8cba493dd1efd0767ec0a3327af",
 		"module.json": "e28a3aa8da5750a88fc8c81f86d7196cc9e5ad4560f3e601a83d391cd612b836",
 		"readme.md": "0b40d42562256ae5d793e848d50ef0297922ef72d47cd04bfda2d148c7abbfe5"
 	},
@@ -8,6 +8,7 @@
 		"C_RESET_ALL_DUNGEON": 1,
 		"S_CHAT": 2,
 		"S_DUNGEON_EVENT_MESSAGE": 2,
+		"S_INSTANT_MOVE": 3,
 		"S_LOGIN": 11,
 		"S_SPAWN_ME": 3,
 		"S_SPAWN_NPC": 10
