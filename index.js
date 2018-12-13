@@ -79,7 +79,7 @@ module.exports = function FastSolo(mod) {
 			mod.command.message('Usage: /8 solo - Turn module on/off.');
 			break;
 		case 'box':
-			if (zone == 9713)
+			if (mod.game.me.zone == 9713)
 				teleport();
 			mod.command.message('Attempted to teleport to ghillie chest.');
 			break;
