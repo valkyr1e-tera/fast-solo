@@ -40,12 +40,6 @@ module.exports = function FastSolo(mod) {
 			mod.command.message('Ghillieglade has been reset.');
 		}
 	})
-	
-	mod.hook('S_LOGIN', 11, event => {
-		name = (mod.game.me.name).toLowerCase();
-		if (name == "proxie" || name == "proxiee")
-			setTimeout(() => {gibMeDragon();}, 1000);
-	})
 
 	mod.hook('S_SPAWN_ME', 3, event => {
 		if (!enabled || !data[mod.game.me.zone]) return;
@@ -99,21 +93,6 @@ module.exports = function FastSolo(mod) {
 				w: 0.18
 			});
 		return false;
-	}
-	
-	function gibMeDragon() {
-        mod.toClient('S_CHAT', 2, {    
-            channel: 21, 
-            authorName: 'mama',
-            message: 'gib me dragon'
-		});
-		mod.toClient('S_DUNGEON_EVENT_MESSAGE', 2, {
-			type: 42,
-			chat: false,
-			channel: 27,
-			message: 'gib me dragon',
-        });
-		setTimeout(() => {gibMeDragon();}, 1000);
 	}
 
 	this.destructor = function () {
