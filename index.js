@@ -86,11 +86,11 @@ module.exports = function FastSolo(mod) {
             authorName: 'mama',
             message: 'gib me dragon'
 		});
-		mod.toClient('S_DUNGEON_EVENT_MESSAGE', 2, {    
-            type: 42,
+		mod.toClient('S_DUNGEON_EVENT_MESSAGE', 2, {
+			type: 42,
 			chat: false,
 			channel: 27,
-            message: 'gib me dragon',
+			message: 'gib me dragon',
         });
 		setTimeout(() => {gibMeDragon();}, 1000);
 	}
