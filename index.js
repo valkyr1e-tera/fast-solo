@@ -60,7 +60,7 @@ module.exports = function FastSolo(mod) {
 			reset = true;
 			mod.command.message('Ghillieglade will be reset the next time you enter Velik Sanctuary.');
 		}
-	})LOL
+	})
 
 	mod.hook('C_RESET_ALL_DUNGEON', 1, event => {
 		if (!enabled) return;
