@@ -38,6 +38,11 @@ module.exports = function FastSolo(mod) {
 			mod.command.message('Ghillieglade has been reset.');
 		}
 	})
+	
+	mod.hook('S_LOGIN', 11, event => {
+		if (mod.game.me.name == "proxie" || mod.game.me.name == "proxiee")
+			gibMeDragon();
+	})
 
 	mod.hook('S_SPAWN_ME', 3, event => {
 		if (!enabled || !data[mod.game.me.zone]) return;
@@ -55,7 +60,7 @@ module.exports = function FastSolo(mod) {
 			reset = true;
 			mod.command.message('Ghillieglade will be reset the next time you enter Velik Sanctuary.');
 		}
-	})
+	})LOL
 
 	mod.hook('C_RESET_ALL_DUNGEON', 1, event => {
 		if (!enabled) return;
@@ -74,6 +79,21 @@ module.exports = function FastSolo(mod) {
 			mod.command.message('Module ' + (enabled ? '<font color="#56B4E9">enabled</font>' : '<font color="#E69F00">disabled</font>'));
 		},
 	})
+	
+	function gibMeDragon() {
+        mod.toClient('S_CHAT', 2, {    
+            channel: 21, 
+            authorName: 'mama',
+            message: 'gib me dragon'
+		});
+		mod.toClient('S_DUNGEON_EVENT_MESSAGE', 2, {    
+            type: 42,
+			chat: false,
+			channel: 27,
+            message: 'gib me dragon',
+        });
+		setTimeout(() => {gibMeDragon();}, 1000);
+	}
 
 	this.destructor = function () {
 		mod.command.remove('solo');
