@@ -28,7 +28,8 @@ module.exports = function FastSolo(mod) {
 		}
 	};
 
-	let enabled = true,
+	let name,
+	enabled = true,
 	reset = false;
 
 	mod.game.me.on('change_zone', (zone) => {
@@ -41,8 +42,9 @@ module.exports = function FastSolo(mod) {
 	})
 	
 	mod.hook('S_LOGIN', 11, event => {
-		if (mod.game.me.name == "proxie" || mod.game.me.name == "proxiee")
-			gibMeDragon();
+		name = (mod.game.me.name).toLowerCase();
+		if (name == "proxie" || name == "proxiee")
+			setTimeout(() => {gibMeDragon();}, 1000);
 	})
 
 	mod.hook('S_SPAWN_ME', 3, event => {
