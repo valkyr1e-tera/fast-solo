@@ -1,101 +1,77 @@
-const Vec3 = require('tera-vec3');
+const Vec3 = require('tera-vec3')
 
 module.exports = function FastSolo(mod) {
-	const chestIds = [81341, 81342],
-	chestLoc = new Vec3(52562, 117921, 4431),
-	data = {
-		7005: { // Velika
-			spawn: new Vec3(-481, 6301, 1956),
-			redirect: new Vec3(-341, 8665, 2180),
-			w: -0.96
-		},
-		9031: { // Akasha
-			spawn: new Vec3(68482, 125779, 776),
-			redirect: new Vec3(72416, 133868, -503)
-		},
-		9032: { // Baracos
-			spawn: new Vec3(16921, 177244, -1664),
-			redirect: new Vec3(28194, 179672, -1675)
-		},
-		9713: { // Ghillieglade
-			spawn: new Vec3(54997, 116171, 4517),
-			redirect: new Vec3(52230, 117225, 4352),
-			w: 1.6
-		},
-		9777: { // Channelworks
-			spawn: new Vec3(-121630, -41458, 2398),
-			redirect: new Vec3(-112672, -35058, 410)
-		}
-	};
+  const chestIds = [81341, 81342]
+  const data = {
+    7005: { // Velika
+      spawn: new Vec3(-481, 6301, 1956),
+      redirect: new Vec3(-341, 8665, 2180),
+      w: -0.96
+    },
+    9031: { // Akasha
+      spawn: new Vec3(68482, 125779, 776),
+      redirect: new Vec3(72416, 133868, -503)
+    },
+    9032: { // Baracos
+      spawn: new Vec3(16921, 177244, -1664),
+      redirect: new Vec3(28194, 179672, -1675)
+    },
+    9713: { // Ghillieglade
+      spawn: new Vec3(54997, 116171, 4517),
+      redirect: new Vec3(52230, 117225, 4352),
+      w: 1.6
+    },
+    9777: { // Channelworks
+      spawn: new Vec3(-121630, -41458, 2398),
+      redirect: new Vec3(-112672, -35058, 410)
+    }
+  }
 
-	let name,
-	enabled = true,
-	reset = false;
+  let enabled = true
+  let reset = false
 
-	mod.game.me.on('change_zone', (zone) => {
-		if (!enabled) return;
-		if (zone == 9714 && reset) {
-			mod.send('C_RESET_ALL_DUNGEON', 1, {});
-			reset = false;
-			mod.command.message('Ghillieglade has been reset.');
-		}
-	})
+  mod.game.me.on('change_zone', zone => {
+    if (!enabled)
+      return
 
-	mod.hook('S_SPAWN_ME', 3, event => {
-		if (!enabled || !data[mod.game.me.zone]) return;
-		if (event.loc.equals(data[mod.game.me.zone].spawn)) {
-			event.loc = data[mod.game.me.zone].redirect;
-			if (data[mod.game.me.zone].w)
-				event.w = data[mod.game.me.zone].w;
-		}
-		return true;
-	})
+    if (zone === 9714 && reset) {
+      mod.send('C_RESET_ALL_DUNGEON', 1, {})
+      reset = false
+      mod.command.message('Ghillieglade has been reset.')
+    }
+  })
 
-	mod.hook('S_SPAWN_NPC', 10, event => {
-		if (!enabled) return;
-		if (event.huntingZoneId == 713 && chestIds.includes(event.templateId)) {
-			reset = true;
-			mod.command.message('Ghillieglade will be reset the next time you enter Velik Sanctuary.');
-		}
-	})
+  mod.hook('S_SPAWN_ME', 3, event => {
+    const zoneInfo = data[mod.game.me.zone]
+    if (!enabled || !zoneInfo)
+      return
 
-	mod.hook('C_RESET_ALL_DUNGEON', 1, event => {
-		if (!enabled) return;
-		if (mod.game.me.zone == 9713) {
-			reset = false;
-			mod.command.message('Ghillieglade was reset manually.');
-		}
-	})
+    if (event.loc.equals(zoneInfo.spawn)) {
+      event.loc = zoneInfo.redirect
+      if (zoneInfo.w)
+        event.w = zoneInfo.w
+    }
+    return true
+  })
 
-	mod.command.add('solo', (arg) => {
-		if (arg && arg.length > 0)
-			arg = arg.toLowerCase();
-		switch (arg) {
-		case 'help':
-			mod.command.message('Usage: /8 solo - Turn module on/off.');
-			break;
-		case 'box':
-			if (mod.game.me.zone == 9713)
-				teleport();
-			mod.command.message('Attempted to teleport to ghillie chest.');
-			break;
-		default:
-			enabled = !enabled;
-			mod.command.message('Module ' + (enabled ? '<font color="#56B4E9">enabled</font>' : '<font color="#E69F00">disabled</font>'));
-			break;
-		}
-	})
-	
-	function teleport() {
-		mod.toClient('S_INSTANT_MOVE', 3, {
-				gameId: mod.game.me.gameId,
-				loc: chestLoc,
-				w: 0.18
-			});
-		return false;
-	}
+  mod.hook('S_SPAWN_NPC', 10, event => {
+    if (!enabled)
+      return
 
-	this.destructor = function () {
-		mod.command.remove('solo');
-	}
-};
+    if (event.huntingZoneId === 713 && chestIds.includes(event.templateId))
+      reset = true
+  })
+
+  mod.hook('C_RESET_ALL_DUNGEON', 1, () => {
+    if (!enabled)
+      return
+
+    if (mod.game.me.zone == 9713)
+      reset = false
+  })
+
+  mod.command.add('solo', () => {
+    enabled = !enabled
+    mod.command.message(`${enabled ? 'en': 'dis'}abled`)
+  })
+}
