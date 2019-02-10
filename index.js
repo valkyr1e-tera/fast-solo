@@ -54,7 +54,7 @@ module.exports = function FastSolo(mod) {
     return true
   })
 
-  mod.hook('S_SPAWN_NPC', 10, event => {
+  mod.hook('S_SPAWN_NPC', 11, event => {
     if (!enabled)
       return
 
